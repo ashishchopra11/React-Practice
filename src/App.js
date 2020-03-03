@@ -1,8 +1,21 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import styled from 'styled-components';
 import Person from './Person/Person';
-import person from './Person/Person';
+
+const StyledButton = styled.button`
+    background-color:'green',
+    color: white;
+    font: inherit;
+    border: 1px solid blue;
+    padding: 8px;
+    cursor: pointer;
+    &:hover {
+      background-color: lightgreen;
+      color: black;
+}
+`;
 
 class App extends Component {
   state = {
@@ -14,16 +27,6 @@ class App extends Component {
     otherState: 'soome other value',
     showPersons: false
   }
-  // switchNameHandler = (newName) =>{
-  //   // console.log('was clicked');
-  //   this.setState({
-  //     persons: [
-  //       {name:'Ashish',age:23},
-  //       {name:'rawat',age:22},
-  //       {name:'Stephanie', age:26}
-  //     ]
-  //   })
-  // }
   deletePersonHandler = (personIndex) =>{
     // const persons = this.state.persons.slice();
     console.log('this is a sample line');
@@ -60,15 +63,20 @@ class App extends Component {
 
   render() {
     const style = {
-      backgroundColor:'white',
+      backgroundColor:'green',
+      color:'white',
       font:'inherit',
       border:'1px solid blue',
       padding: '8px',
-      cursor:'pointer'
+      cursor:'pointer',
+      ':hover':{
+        backgroundColor: 'lightgreen',
+        color: 'green'
+      }
     };
     let persons = null;
 
-    if(this,this.state.showPersons){
+    if(this.state.showPersons){
       persons = (
         <div>
           {this.state.persons.map((person, index) => {
@@ -82,16 +90,30 @@ class App extends Component {
       
       </div> 
       );
+      style.backgroundColor = 'red';
+      style[':hover'] ={
+        backgroundColor: 'salmon',
+        color: 'black'
+      }
     }
+    const classes = [];
+    if(this.state.persons.length <= 2){
+      classes.push('red'); //classes = ['red']
+    }
+    if(this.state.persons.length <= 1){
+      classes.push('bold'); //classes = ['red','bold']
+    }
+
     return (
+      // <StyleRoot>
       <div className="App">
       <h1>Hi , I am Sanjay.....Sanjay Singhania</h1>
-      <button 
-      style = {style}
-      onClick={this.togglePersonsHandler}>Toggle Persons</button>
+      <p className={classes.join(' ')}> This is really working</p>
+      <StyledButton 
+        onClick={this.togglePersonsHandler}>Toggle Persons</StyledButton>
        {persons}
-
      </div>
+    //  </StyleRoot>
     );
   }
 }
