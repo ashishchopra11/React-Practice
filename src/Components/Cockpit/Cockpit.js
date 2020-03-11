@@ -17,6 +17,7 @@ const cockpit = (props) => {
     }
     return (
         <div className={classes.Cockpit}>
+            <h1>{props.title}</h1>
         <h1>Hi , I am Sanjay.....Sanjay Singhania</h1>
         <p className={assignedClasses.join(' ')}> This is really working</p>
         <button 
