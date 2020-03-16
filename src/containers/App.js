@@ -4,6 +4,8 @@ import classes from './App.css';
 // import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 import Persons from '../Components/Persons/Persons';
 import Cockpit from '../Components/Cockpit/Cockpit';
+import withClass from '../hoc/withClass';
+// import Auxiliary from '../hoc/Auxiliary';
 
 
 class App extends Component {
@@ -21,7 +23,8 @@ class App extends Component {
     ],
     otherState: 'soome other value',
     showPersons: false,
-    showCockpit: true
+    showCockpit: true,
+    changeCounter: 0
   }
   static getDerivedStateFromProps(props, state) {
     console.log('[App.js] getDerivedStateFromProps',props)
@@ -70,8 +73,13 @@ class App extends Component {
     const persons = [...this.state.persons];
     persons[personIndex] = person;
   
-    this.setState( {persons: persons } );
-  }
+    this.setState((prevState, props) => {
+      return {
+      persons: persons, 
+      changeCounter: prevState.changeCounter+1 
+      };
+    });
+  };
   
   togglePersonsHandler = () =>{
     const doesShow = this.state.showPersons;
@@ -89,7 +97,7 @@ class App extends Component {
     }
     
     return (  
-      <div className={classes.App}>
+      <div classes={classes.App}>
         <button onClick={() =>{this.setState({showCockpit: false});
       }}
       >
@@ -108,4 +116,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withClass(App, classes.App);
