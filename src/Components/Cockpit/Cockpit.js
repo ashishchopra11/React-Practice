@@ -1,8 +1,12 @@
 import React, {useEffect, useRef } from 'react';
 import classes from './Cockpit.css';
 import AuthContext from '../../context/auth-context';
+
 const cockpit = (props) => {
-  const toggleBtnRef = React.createRef(null);
+const toggleBtnRef = React.createRef(null);
+
+// console.log(authContext.authenticated);
+
 
     useEffect(() => {
       console.log('[Cockpit.js] useEffect');

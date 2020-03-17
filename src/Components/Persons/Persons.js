@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import Person from './Person/Person';
 
 
+
 class Persons extends PureComponent {
 
 // */PureComponent predefined checks all the conditions that you will be checking manually*/
@@ -38,10 +39,8 @@ class Persons extends PureComponent {
     }
 
     render() {
-        console.log('[Persons.js] rendering.....');
-        return   
-        
-       (context) => this.props.persons.map((person, index) => {
+        console.log('[Persons.js] rendering...');
+        return this.props.persons.map((person, index) => {
             return ( 
               <Person
                     click={() => this.props.clicked(index)} 
@@ -49,7 +48,6 @@ class Persons extends PureComponent {
                     age = {person.age} 
                     key = {person.id} 
                     changed = {(event) =>this.props.changed(event, person.id)}
-                    // isAuth={this.props.isAuthenticated}
                     />
             );
           });

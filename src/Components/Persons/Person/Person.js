@@ -11,16 +11,20 @@ class Person extends Component {
         super(props);
         this.inputElementRef = React.createRef();
     }
+
+    static contextType = AuthContext;
+
     componentDidMount() {
         // this.inputElementRef.focus();
         this.inputElementRef.current.focus();
+        console.log(this.context.authenticated);
     }
     render() {
         console.log('[person.js] rendering');
         return (
             <Auxiliary>
-                <AuthContext.Consumer>
-                    {(context) => context.authenticated ?<p>Authenticated!</p> : <p>Please Log in</p> }
+                
+                {this.context.authenticated ? <p>Authenticated!</p> : <p>Please Log in</p> }
                  <p onClick={this.props.click}> I'm {this.props.name} and  i am {this.props.age} years old!'</p>
                  <p key="i2">{this.props.children}</p>
                  <input key="i3" 
@@ -28,9 +32,9 @@ class Person extends Component {
                         type="text" 
                         onChange={this.props.changed}
                         value={this.props.name}/>
-                </AuthContext.Consumer>
+              
             </Auxiliary>
-            
+             
           );
     }
 };
@@ -40,4 +44,4 @@ Person.propTypes = {
     age: PropTypes.number,
     changed: PropTypes.func
 };
-export default withClass(Person, classes.Person);
+export default Person;
